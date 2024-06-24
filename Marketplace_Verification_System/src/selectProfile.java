@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -44,8 +45,9 @@ public class selectProfile extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\kalli\\Downloads\\image.png"));
-		lblNewLabel.setBounds(25, 22, 46, 41);
+		Image images = new ImageIcon(this.getClass().getResource("/fb_small_logo.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(images));
+		lblNewLabel.setBounds(12, 20, 60, 60);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("facebook");
