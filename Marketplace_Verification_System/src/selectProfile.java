@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class selectProfile extends JFrame {
 
@@ -68,14 +70,32 @@ public class selectProfile extends JFrame {
 		lblNewLabel_4.setBounds(399, 179, 249, 50);
 		contentPane.add(lblNewLabel_4);
 		
-		JButton btnNewButton = new JButton("Buyer\r\n");
-		btnNewButton.setForeground(new Color(45, 45, 255));
+		JButton btnNewButton = new JButton("Buyer");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				customerProfile custProf = new customerProfile();
+				custProf.main();
+	            selectProfile.this.setVisible(false);
+			}
+		});
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton.setBounds(412, 284, 193, 68);
 		contentPane.add(btnNewButton);
 		
-		JButton btnSeller = new JButton("Seller\r\n");
-		btnSeller.setForeground(new Color(45, 45, 255));
+		JButton btnSeller = new JButton("Seller");
+		btnSeller.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				sellerProfile sellProf = new sellerProfile();
+				sellProf.main();
+	            selectProfile.this.setVisible(false);
+			}
+		});
+		btnSeller.setForeground(new Color(255, 255, 255));
+		btnSeller.setBackground(new Color(0, 128, 255));
 		btnSeller.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSeller.setBounds(412, 398, 193, 68);
 		contentPane.add(btnSeller);

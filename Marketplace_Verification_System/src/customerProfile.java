@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class customerProfile extends JFrame {
 
@@ -19,7 +21,7 @@ public class customerProfile extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,6 +60,18 @@ public class customerProfile extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		txtSearch = new JTextField();
+		txtSearch.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtSearch.setForeground(new Color(0, 0, 0));
+				txtSearch.setText("");
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				txtSearch.setForeground(new Color(218, 218, 218));
+				txtSearch.setText("Search");
+			}
+		});
 		txtSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtSearch.setText("Search ");
 		txtSearch.setBounds(298, 73, 432, 47);

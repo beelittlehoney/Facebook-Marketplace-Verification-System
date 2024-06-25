@@ -27,7 +27,6 @@ public class loginPage extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField passwordField;
 	private JTextField textField;
-	private JTextField txtPassword_1;
 
 	/**
 	 * Launch the application.
@@ -57,29 +56,6 @@ public class loginPage extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		txtPassword_1 = new JTextField();
-		txtPassword_1.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtPassword_1.getText().equals("Password")) {
-					txtPassword_1.setForeground(new Color(0, 0, 0));
-					txtPassword_1.setText("");
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtPassword_1.getText().equals("")) {
-					txtPassword_1.setForeground(new Color(218, 218, 218));
-					txtPassword_1.setText("Password");
-				}
-			}
-		});
-		txtPassword_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtPassword_1.setText("Password");
-		txtPassword_1.setBounds(305, 355, 364, 50);
-		contentPane.add(txtPassword_1);
-		txtPassword_1.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("");
 		Image images = new ImageIcon(this.getClass().getResource("/fb_small_logo.png")).getImage();
@@ -134,7 +110,7 @@ public class loginPage extends JFrame {
 				selectProfile sProf = new selectProfile();
 				
 				String user = txtEmail.getText();
-				String pass = txtPassword_1.getText();
+				String pass = passwordField.getText();
 				
 				Connection connection = null;
 				
@@ -180,6 +156,24 @@ public class loginPage extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		passwordField = new JPasswordField();
+		passwordField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (passwordField.getText().equals("Password")) {
+					passwordField.setForeground(new Color(0, 0, 0));
+					passwordField.setEchoChar('●');
+					passwordField.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (passwordField.getText().equals("")) {
+					passwordField.setForeground(new Color(218, 218, 218));
+					passwordField.setText("Password");
+					passwordField.setEchoChar((char)0);
+				}
+			}
+		});
 		passwordField.setBounds(305, 357, 364, 50);
 		contentPane.add(passwordField);
 		
