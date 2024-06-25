@@ -16,6 +16,8 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class loginPage extends JFrame {
 
@@ -24,7 +26,6 @@ public class loginPage extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField textField;
 	private JTextField txtPassword_1;
-	private JTextField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,22 @@ public class loginPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		txtPassword_1 = new JTextField();
-		txtPassword_1.setForeground(new Color(218, 218, 218));
+		txtPassword_1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtPassword_1.getText().equals("Password")) {
+					txtPassword_1.setForeground(new Color(0, 0, 0));
+					txtPassword_1.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtPassword_1.getText().equals("")) {
+					txtPassword_1.setForeground(new Color(218, 218, 218));
+					txtPassword_1.setText("Password");
+				}
+			}
+		});
 		txtPassword_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtPassword_1.setText("Password");
 		txtPassword_1.setBounds(305, 355, 364, 50);
@@ -81,29 +97,45 @@ public class loginPage extends JFrame {
 		lblNewLabel_3.setBounds(234, 83, 580, 88);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Please log in your account");
+		JLabel lblNewLabel_4 = new JLabel("Please login your account");
 		lblNewLabel_4.setForeground(new Color(255, 255, 255));
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_4.setBounds(375, 168, 249, 50);
 		contentPane.add(lblNewLabel_4);
 		
 		txtEmail = new JTextField();
-		txtEmail.setForeground(new Color(218, 218, 218));
-		txtEmail.addMouseListener(new MouseAdapter() {
+		txtEmail.addFocusListener(new FocusAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtEmail.setText("");
+			public void focusGained(FocusEvent e) {
+				if (txtEmail.getText().equals("Email")) {
+					txtEmail.setForeground(new Color(0, 0, 0));
+					txtEmail.setText("");					
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtEmail.getText().equals("")) {
+					txtEmail.setForeground(new Color(218, 218, 218));
+					txtEmail.setText("Email");
+				}
 			}
 		});
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtEmail.setText("Email");
 		txtEmail.setBounds(305, 262, 364, 56);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Log In");
-		btnNewButton.setForeground(new Color(150, 150, 150));
-		btnNewButton.setBackground(new Color(53, 53, 202));
+		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectProfile sProf = new selectProfile();
+				sProf.main();
+				loginPage.this.setVisible(false);
+			}
+		});
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton.setBounds(432, 470, 110, 41);
 		contentPane.add(btnNewButton);
@@ -120,12 +152,6 @@ public class loginPage extends JFrame {
 		textField.setBounds(305, 262, 364, 56);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
-		txtPassword = new JTextField();
-		txtPassword.setText("Password");
-		txtPassword.setBounds(305, 388, 96, 19);
-		contentPane.add(txtPassword);
-		txtPassword.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\kalli\\OneDrive - National University\\Pictures\\custombackground.png"));
