@@ -1,16 +1,18 @@
 import java.sql.*;
+import java.util.*;
 
 public class dbDisplayTable {
 
 	public static void main(String[] args) {
 		
 		Connection connection = null;
+		
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "user";
 		String driver = "com.mysql.cj.jdbc.Driver";
 		String userName = "root";
 		String password = "";
-		String f1, f2;
+		String f1, f2, f3;
 		
 		try {
 			Class.forName(driver);
@@ -23,8 +25,10 @@ public class dbDisplayTable {
 			while (rs.next()) {
 				f1 = rs.getString(1);
 				f2 = rs.getString(2);
-				System.out.println(f1 + " " + f2);
+				f3 = rs.getString(3);
+				System.out.println(f1 + " " + f2 + " " + f3);
 			}
+			
 			connection.close();
 			System.out.println("\nDisconnected from database");
 			
