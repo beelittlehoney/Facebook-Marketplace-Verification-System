@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +19,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.*;
 
 public class loginPage extends JFrame {
 
@@ -130,8 +132,45 @@ public class loginPage extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectProfile sProf = new selectProfile();
-				sProf.main();
-				loginPage.this.setVisible(false);
+				
+				String user = txtEmail.getText();
+				String pass = txtPassword_1.getText();
+				
+				Connection connection = null;
+				
+				String url = "jdbc:mysql://localhost:3306/";
+				String dbName = "user";
+				String driver = "com.mysql.cj.jdbc.Driver";
+				String userName = "root";
+				String password = "";
+				
+				try {
+					Class.forName(driver);
+					connection = DriverManager.getConnection(url + dbName, userName, password);
+					String query = "Select * FROM user WHERE username = ? AND password = ?";
+					PreparedStatement ps = connection.prepareStatement(query);
+			        ps.setString(1, user);
+			        ps.setString(2, pass);
+			        
+			        ResultSet rs = ps.executeQuery();
+					
+			        if (rs.next()) {
+			            sProf.main();
+			            loginPage.this.setVisible(false);
+			        } else {
+			            JOptionPane.showMessageDialog(btnNewButton, "Invalid Login");
+			        }
+			        rs.close();
+			        ps.close();
+			        connection.close();
+			        
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setForeground(new Color(255, 255, 255));
