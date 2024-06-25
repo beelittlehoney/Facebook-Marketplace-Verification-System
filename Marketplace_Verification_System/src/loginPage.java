@@ -1,4 +1,3 @@
-//Java Push Test - Kalli Pags
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
