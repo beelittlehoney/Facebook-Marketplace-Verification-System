@@ -91,5 +91,4 @@ public class sellerProfile extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 	}
-
 }
