@@ -12,12 +12,23 @@ import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JTextPane;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class customerProfile extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtSearch;
+	
+	private static String user;
+	private static String pass;
 
 	/**
 	 * Launch the application.
@@ -26,7 +37,7 @@ public class customerProfile extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					customerProfile frame = new customerProfile();
+					customerProfile frame = new customerProfile(user, pass);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +49,11 @@ public class customerProfile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public customerProfile() {
+	public customerProfile(String user, String pass) {
+		
+		this.user = user;
+        this.pass = pass;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1054, 635);
 		contentPane = new JPanel();
@@ -50,6 +65,53 @@ public class customerProfile extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		Image images = new ImageIcon(this.getClass().getResource("/fb_small_logo.png")).getImage();
+		
+		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Connection connection = null;
+				
+				String url = "jdbc:mysql://localhost:3306/";
+				String dbName = "user";
+				String driver = "com.mysql.cj.jdbc.Driver";
+				String userName = "root";
+				String password = "";
+				
+				try {
+					Class.forName(driver);
+					connection = DriverManager.getConnection(url + dbName, userName, password);
+					String query = "Select * FROM user WHERE username = ? AND password = ?";
+					PreparedStatement ps = connection.prepareStatement(query);
+			        ps.setString(1, user);
+			        ps.setString(2, pass);
+			        
+			        ResultSet rs = ps.executeQuery();
+					
+			        if (rs.next()) {
+			        	selectProfile sProf = new selectProfile(user, pass);
+			        	sProf.setVisible(true);
+			            customerProfile.this.setVisible(false);
+			        }
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				selectProfile sProf = new selectProfile(user, pass);
+				customerProfile.this.setVisible(false);
+	            sProf.setVisible(true);
+			}
+		});
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBackground(new Color(0, 128, 255));
+		btnNewButton_1.setBounds(93, 74, 110, 41);
+		contentPane.add(btnNewButton_1);
 		lblNewLabel.setIcon(new ImageIcon(images));
 		lblNewLabel.setBounds(12, 20, 60, 60);
 		contentPane.add(lblNewLabel);

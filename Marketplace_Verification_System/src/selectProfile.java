@@ -131,7 +131,7 @@ public class selectProfile extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				customerProfile custProf = new customerProfile();
+				customerProfile custProf = new customerProfile(user, pass);
 				custProf.setVisible(true);
 	            selectProfile.this.setVisible(false);
 			}
