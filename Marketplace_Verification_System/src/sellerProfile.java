@@ -20,6 +20,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JList;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
 
 public class sellerProfile extends JFrame {
 
@@ -106,6 +109,10 @@ public class sellerProfile extends JFrame {
 	            sProf.setVisible(true);
 			}
 		});
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(957, 99, 60, 60);
+		contentPane.add(lblNewLabel_1);
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBackground(new Color(0, 128, 255));
@@ -138,14 +145,16 @@ public class sellerProfile extends JFrame {
 		lblNewLabel_4.setBounds(791, 115, 172, 31);
 		contentPane.add(lblNewLabel_4);
 		
-		JButton btnMyRating = new JButton("My Rating");
-		btnMyRating.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnMyRating.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnMyRating.setBounds(88, 355, 150, 58);
-		contentPane.add(btnMyRating);
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(630, 276, 325, 60);
+		contentPane.add(progressBar);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("My Ratings");
+		lblNewLabel_4_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4_1.setForeground(Color.WHITE);
+		lblNewLabel_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_4_1.setBounds(713, 234, 172, 31);
+		contentPane.add(lblNewLabel_4_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\kalli\\OneDrive - National University\\Pictures\\solidBackground.png"));
