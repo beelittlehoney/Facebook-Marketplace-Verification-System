@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JTextPane;
 
 public class customerProfile extends JFrame {
 
@@ -83,6 +84,25 @@ public class customerProfile extends JFrame {
 		lblNewLabel_3.setBounds(0, 0, 1040, 598);
 		contentPane.add(lblNewLabel_3);
 		
+		JLabel lblNewLabel_4 = new JLabel("Motorcycle");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_4.setForeground(new Color(255, 255, 255));
+		lblNewLabel_4.setBounds(260, 527, 100, 31);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("Car");
+		lblNewLabel_4_1.setForeground(Color.WHITE);
+		lblNewLabel_4_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_4_1.setBounds(711, 527, 45, 31);
+		contentPane.add(lblNewLabel_4_1);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(150, 178, 320, 320);
+		contentPane.add(textPane);
+		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setBounds(567, 178, 320, 320);
+		contentPane.add(textPane_1);
+		
 	}
-
 }
