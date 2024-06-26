@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +17,8 @@ import java.awt.TextField;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.PublicKey;
+
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -107,7 +110,6 @@ public class loginPage extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				selectProfile sProf = new selectProfile();
 				
 				String user = txtEmail.getText();
 				String pass = passwordField.getText();
@@ -131,7 +133,8 @@ public class loginPage extends JFrame {
 			        ResultSet rs = ps.executeQuery();
 					
 			        if (rs.next()) {
-			            sProf.main();
+			        	selectProfile sProf = new selectProfile(user, pass);
+			        	sProf.setVisible(true);
 			            loginPage.this.setVisible(false);
 			        } else {
 			            JOptionPane.showMessageDialog(btnNewButton, "Invalid Login");

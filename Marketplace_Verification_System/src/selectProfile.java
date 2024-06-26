@@ -11,11 +11,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.SwingConstants;
 
 public class selectProfile extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	private static String user;
+	private static String pass;
 
 	/**
 	 * Launch the application.
@@ -24,7 +33,7 @@ public class selectProfile extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					selectProfile frame = new selectProfile();
+					selectProfile frame = new selectProfile(user, pass);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +45,11 @@ public class selectProfile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public selectProfile() {
+	public selectProfile(String user, String pass) {
+        
+		this.user = user;
+        this.pass = pass;
+        
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1054, 635);
 		contentPane = new JPanel();
@@ -64,10 +77,39 @@ public class selectProfile extends JFrame {
 		lblNewLabel_3.setBounds(220, 80, 602, 129);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Please select your profile");
+		JLabel lblNewLabel_4 = new JLabel();
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+        String url = "jdbc:mysql://localhost:3306/";
+        String dbName = "user";
+        String userName = "root";
+        String password = "";
+        String query = "SELECT name FROM user WHERE username = ?";
+
+        try {
+            Connection connect = DriverManager.getConnection(url + dbName, userName, password);
+            
+            PreparedStatement p = connect.prepareStatement(query);
+            p.setString(1, this.user);
+            
+            ResultSet r = p.executeQuery();
+            
+            if (r.next()) {
+                String userNameFromDB = r.getString("name");
+                lblNewLabel_4.setText("Welcome " + userNameFromDB + " Please select your profile");
+            } else {
+                lblNewLabel_4.setText("Welcome " + user + " Please select your profile");
+            }
+            
+            r.close();
+            p.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_4.setBounds(399, 179, 249, 50);
+		lblNewLabel_4.setBounds(223, 179, 592, 50);
 		contentPane.add(lblNewLabel_4);
 		
 		JButton btnNewButton = new JButton("Buyer");
