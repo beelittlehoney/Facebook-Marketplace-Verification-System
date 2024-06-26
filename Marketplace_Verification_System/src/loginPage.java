@@ -139,10 +139,6 @@ public class loginPage extends JFrame {
 			        } else {
 			            JOptionPane.showMessageDialog(btnNewButton, "Invalid Login");
 			        }
-			        rs.close();
-			        ps.close();
-			        connection.close();
-			        
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {

@@ -61,6 +61,21 @@ public class selectProfile extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		Image images = new ImageIcon(this.getClass().getResource("/fb_small_logo.png")).getImage();
+		
+		JButton btnNewButton_1 = new JButton("Logout");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loginPage lPage = new loginPage();
+				selectProfile.this.setVisible(false);
+	            lPage.setVisible(true);
+			}
+		});
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBackground(new Color(0, 128, 255));
+		btnNewButton_1.setBounds(464, 508, 110, 41);
+		contentPane.add(btnNewButton_1);
 		lblNewLabel.setIcon(new ImageIcon(images));
 		lblNewLabel.setBounds(12, 20, 60, 60);
 		contentPane.add(lblNewLabel);
@@ -74,11 +89,10 @@ public class selectProfile extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("WELCOME TO FACEBOOK MARKETPLACE");
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 40));
-		lblNewLabel_3.setBounds(220, 80, 602, 129);
+		lblNewLabel_3.setBounds(218, 80, 602, 129);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel();
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
         String url = "jdbc:mysql://localhost:3306/";
         String dbName = "user";
         String userName = "root";
@@ -107,6 +121,7 @@ public class selectProfile extends JFrame {
             e.printStackTrace();
         }
 		
+        lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setForeground(Color.WHITE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_4.setBounds(223, 179, 592, 50);
@@ -117,29 +132,29 @@ public class selectProfile extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				customerProfile custProf = new customerProfile();
-				custProf.main();
+				custProf.setVisible(true);
 	            selectProfile.this.setVisible(false);
 			}
 		});
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(412, 284, 193, 68);
+		btnNewButton.setBounds(422, 284, 193, 68);
 		contentPane.add(btnNewButton);
 		
 		JButton btnSeller = new JButton("Seller");
 		btnSeller.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sellerProfile sellProf = new sellerProfile();
-				sellProf.main();
+				sellerProfile sellProf = new sellerProfile(user, pass);
+				sellProf.setVisible(true);
 	            selectProfile.this.setVisible(false);
 			}
 		});
 		btnSeller.setForeground(new Color(255, 255, 255));
 		btnSeller.setBackground(new Color(0, 128, 255));
 		btnSeller.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSeller.setBounds(412, 398, 193, 68);
+		btnSeller.setBounds(422, 398, 193, 68);
 		contentPane.add(btnSeller);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
