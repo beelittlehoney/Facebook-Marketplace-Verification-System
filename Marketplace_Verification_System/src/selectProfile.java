@@ -67,8 +67,8 @@ public class selectProfile extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loginPage lPage = new loginPage();
-				selectProfile.this.setVisible(false);
 	            lPage.setVisible(true);
+	            selectProfile.this.setVisible(false);
 			}
 		});
 		btnNewButton_1.setForeground(Color.WHITE);

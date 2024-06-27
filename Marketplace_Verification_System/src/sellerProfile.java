@@ -103,10 +103,6 @@ public class sellerProfile extends JFrame {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
-				selectProfile sProf = new selectProfile(user, pass);
-				sellerProfile.this.setVisible(false);
-	            sProf.setVisible(true);
 			}
 		});
 		
